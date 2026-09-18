@@ -27,8 +27,11 @@ public class LoginPart1 {
     }
 
     /**
-     * Checks whether the username contains an underscore
+    * Checks whether the username contains an underscore
     * and is no more than five characters long.
+    *
+    * @param username the username to validate
+    * @return true if the username is valid, otherwise false
     */
     public boolean checkUserName(String username) {
 
@@ -41,8 +44,7 @@ public class LoginPart1 {
     * Checks whether the email address has a basic valid format.
     *
     * @param email the email address to validate
-    * @return true if the email address is correctly formatted,
-    *         otherwise false
+    * @return true if the email format is valid, otherwise false
     */
     public boolean checkEmail(String email) {
 
@@ -51,8 +53,14 @@ public class LoginPart1 {
     }
 
     /**
-    * Checks whether the password has at least eight characters,
-     * a capital letter, a number, and a special character.
+    * Checks whether the password meets the required complexity rules.
+    *
+    * The password must contain at least eight characters,
+    * a capital letter, a number, and a special character.
+    *
+    * @param password the password to validate
+    * @return true if the password meets all requirements,
+    *         otherwise false
     */
     public boolean checkPasswordComplexity(String password) {
 
@@ -165,8 +173,8 @@ public class LoginPart1 {
     * Checks whether the supplied username or email and password
     * match the registered login details.
     *
-    * @param usernameOrEmail the username or email entered by the user
-    * @param password the password entered by the user
+    * @param usernameOrEmail the username or email used to log in
+    * @param password the password used to log in
     * @return true if the login details are correct, otherwise false
     */
     public boolean loginUser(String usernameOrEmail, String password) {
