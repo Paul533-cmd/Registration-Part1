@@ -19,6 +19,8 @@ public class RegistrationPart1 {
         System.out.println("==========================================");
         System.out.println();
 
+        // Collect the user's personal details.
+        
         // Get first name
         System.out.println("Enter your first name:");
         String firstName = scanner.nextLine();
@@ -27,9 +29,7 @@ public class RegistrationPart1 {
         System.out.println("Enter your surname:");
         String surname = scanner.nextLine();
 
-        // -----------------------------------------
-        // USERNAME REGISTRATION
-        // -----------------------------------------
+        // Validate and capture the username.
         System.out.println();
         System.out.println("--------------- REGISTRATION ---------------");
         System.out.println();
@@ -55,8 +55,7 @@ public class RegistrationPart1 {
 
         System.out.println("Username successfully captured.");
 
-        // EMAIL REGISTRATION
-        // The email address is validated before registration is completed.
+        // Validate and capture the email address.
         
         System.out.println();
         System.out.println("Enter your email address:");
@@ -77,9 +76,7 @@ public class RegistrationPart1 {
 
         System.out.println("Email address successfully captured.");
 
-        // -----------------------------------------
-        // PASSWORD REGISTRATION
-        // -----------------------------------------
+        // Validate and capture the password.
         System.out.println();
         System.out.println("Password must contain:");
         System.out.println("- At least 8 characters");
@@ -107,9 +104,7 @@ public class RegistrationPart1 {
 
         System.out.println("Password successfully captured.");
 
-        // -----------------------------------------
-        // CELL PHONE REGISTRATION
-        // -----------------------------------------
+        // Validate and capture the South African cell phone number.
         System.out.println();
         System.out.println("Cell phone number must use the South African");
         System.out.println("international code (+27).");
@@ -133,9 +128,7 @@ public class RegistrationPart1 {
 
         System.out.println("Cell phone number successfully added.");
 
-        // -----------------------------------------
-        // COMPLETE REGISTRATION
-        // -----------------------------------------
+        // Register the validated user details.
         String registrationMessage = login.registerUser(
                 username,
                 password,
@@ -151,9 +144,7 @@ public class RegistrationPart1 {
         System.out.println("==========================================");
         System.out.println(registrationMessage);
 
-        // -----------------------------------------
-        // LOGIN
-        // -----------------------------------------
+        // Allow the registered user to log in.
         System.out.println();
         System.out.println("==========================================");
         System.out.println("                  LOGIN");
