@@ -262,4 +262,19 @@ public class LoginPart1Test {
                 )
         );
     }
+    
+    @Test
+    public void testUsernameWithNoUnderscore() {
+        assertFalse(login.checkUserName("kyle1"));
+    }
+
+    @Test
+    public void testPasswordWithoutCapitalLetter() {
+        assertFalse(login.checkPasswordComplexity("password1!"));
+    }
+
+    @Test
+    public void testCellPhoneWithoutInternationalCode() {
+        assertFalse(login.checkCellPhoneNumber("0838968976"));
+    }
 }
