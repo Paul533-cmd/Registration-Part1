@@ -237,20 +237,37 @@ public class RegistrationPart1 {
                             System.out.println("3) Store Message");
                             System.out.println("Choose an option:");
 
+                            
                             String action = scanner.nextLine();
                             String result;
 
                             if (action.equals("1")) {
+
                                 result = message.SentMessage(1);
+
                             } else if (action.equals("2")) {
-                                result = message.SentMessage(2);
+
+                                System.out.println(message.SentMessage(2));
+                                System.out.println("Enter 0 to delete this message:");
+                                String deleteChoice = scanner.nextLine();
+
+                                if (deleteChoice.equals("0")) {
+                                    result = "Message deleted successfully.";
+                                } else {
+                                    result = "Invalid choice. Message was not sent or stored.";
+                                }
+
                             } else if (action.equals("3")) {
+
                                 result = message.SentMessage(3);
+
                             } else {
+
                                 result = "Invalid option. Message was not sent.";
                             }
 
                             System.out.println(result);
+
 
                             if (result.equals("Message successfully sent.")) {
                                 System.out.println(message.printMessages());

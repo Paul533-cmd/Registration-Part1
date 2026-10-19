@@ -149,6 +149,7 @@ public class Message {
      * @param choice the selected option
      * @return the result of the selected action
      */
+    
     public String SentMessage(int choice) {
 
         if (choice == 1) {
@@ -179,6 +180,7 @@ public class Message {
 
         return "Invalid option. Please choose 1, 2 or 3.";
     }
+
 
     /**
      * Stores the message in a JSON file.
