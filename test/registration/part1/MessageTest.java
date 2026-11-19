@@ -275,4 +275,38 @@ public class MessageTest {
 
         return text.toString();
     }
+    
+    
+    @Test
+    public void testEmptyMessageRejected() {
+
+        Message empty = new Message(
+                "1234567890",
+                1,
+                "+27718693002",
+                ""
+        );
+
+        assertEquals(
+                "Please enter a message.",
+                empty.checkMessageLength()
+        );
+    }
+
+    @Test
+    public void testWhitespaceOnlyMessageRejected() {
+
+        Message spaces = new Message(
+                "1234567890",
+                1,
+                "+27718693002",
+                "   "
+        );
+
+        assertEquals(
+                "Please enter a message.",
+                spaces.checkMessageLength()
+        );
+    }
+
 }

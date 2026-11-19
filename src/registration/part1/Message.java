@@ -92,13 +92,15 @@ public class Message {
     }
 
     /**
-     * Checks the message length.
+     * Checks that the message is not empty and does not
+     * exceed 250 characters.
      *
      * @return a message explaining whether the text is valid
      */
     public String checkMessageLength() {
 
-        if (messageText == null) {
+        // Reject missing text and messages containing only spaces.
+        if (messageText == null || messageText.trim().isEmpty()) {
             return "Please enter a message.";
         }
 
@@ -149,7 +151,6 @@ public class Message {
      * @param choice the selected option
      * @return the result of the selected action
      */
-    
     public String SentMessage(int choice) {
 
         if (choice == 1) {
@@ -181,8 +182,7 @@ public class Message {
         return "Invalid option. Please choose 1, 2 or 3.";
     }
 
-
-        /**
+    /**
      * Stores the message in the messages.json file.
      *
      * Existing JSON array entries are preserved when another
@@ -196,8 +196,7 @@ public class Message {
      *
      * Java file-handling reference:
      * Oracle Java Documentation - FileWriter.
-     * https://docs.oracle.com/en/java/javase/25/docs/api/
-     * java.base/java/io/FileWriter.html
+     * https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/FileWriter.html
      *
      * These references document the JSON format and Java
      * file-writing APIs used by this implementation.
@@ -251,6 +250,7 @@ public class Message {
                     || existingContent.equals("[]")) {
 
                 newContent = "[" + jsonObject + "]";
+
             } else if (existingContent.startsWith("[")
                     && existingContent.endsWith("]")) {
 
@@ -263,6 +263,7 @@ public class Message {
                     newContent = "[" + previousMessages
                             + "," + jsonObject + "]";
                 }
+
             } else {
                 return "Unable to store message: existing JSON file is invalid.";
             }
@@ -304,6 +305,7 @@ public class Message {
         StringBuilder output = new StringBuilder();
 
         for (Message sentMessage : sentMessages) {
+
             output.append("Message ID: ")
                     .append(sentMessage.messageID).append("\n");
 
@@ -326,7 +328,8 @@ public class Message {
      * @return total messages sent
      */
     public static int returnTotalMessages() {
-    return totalMessagesSent;
+
+        return totalMessagesSent;
     }
 
     /**
@@ -338,12 +341,12 @@ public class Message {
         usedMessageIDs.clear();
         totalMessagesSent = 0;
     }
-    
-    
+
     /**
      * Returns the message ID.
      */
     public String getMessageID() {
+
         return messageID;
     }
 
@@ -351,6 +354,7 @@ public class Message {
      * Returns the message number.
      */
     public int getMessageNumber() {
+
         return messageNumber;
     }
 
@@ -358,6 +362,7 @@ public class Message {
      * Returns the recipient.
      */
     public String getRecipient() {
+
         return recipient;
     }
 
@@ -365,6 +370,7 @@ public class Message {
      * Returns the message text.
      */
     public String getMessageText() {
+
         return messageText;
     }
 
@@ -372,7 +378,7 @@ public class Message {
      * Returns the message hash.
      */
     public String getMessageHash() {
+
         return messageHash;
     }
-
 }
