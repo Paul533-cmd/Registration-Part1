@@ -14,7 +14,7 @@ public class RegistrationPart1 {
         LoginPart1 login = new LoginPart1("", "");
         MessageManager manager = new MessageManager();
 
-        // ADDED: Show the exact JSON file location being used.
+        // Show the exact JSON file location being used.
         System.out.println("JSON file location: "
                 + new java.io.File("messages.json").getAbsolutePath());
 
@@ -182,6 +182,7 @@ public class RegistrationPart1 {
                         break;
                     }
 
+                    // Retry invalid details without using the message quota.
                     System.out.println("Enter recipient cell number (+27...):");
                     String recipient = scanner.nextLine();
 
@@ -196,6 +197,50 @@ public class RegistrationPart1 {
                             recipient,
                             messageText);
 
+                    // Validate both fields before allowing an action.
+                    while (!message.checkRecipientCell().equals(
+                            "Cell phone number successfully captured.")
+                            || !message.checkMessageLength().equals(
+                                    "Message ready to send.")
+                            || messageText.trim().isEmpty()) {
+
+                        System.out.println();
+
+                        if (!message.checkRecipientCell().equals(
+                                "Cell phone number successfully captured.")) {
+                            System.out.println(message.checkRecipientCell());
+                        }
+
+                        if (!message.checkMessageLength().equals(
+                                "Message ready to send.")) {
+                            System.out.println(message.checkMessageLength());
+                        }
+
+                        if (messageText.trim().isEmpty()) {
+                            System.out.println(
+                                    "Message cannot be empty.");
+                        }
+
+                        System.out.println(
+                                "Please correct the message details.");
+                        System.out.println();
+
+                        System.out.println(
+                                "Enter recipient cell number (+27...):");
+                        recipient = scanner.nextLine();
+
+                        System.out.println("Enter your message:");
+                        messageText = scanner.nextLine();
+
+                        // Keep the same message ID and loop number
+                        // while correcting an unsuccessful attempt.
+                        message = new Message(
+                                messageID,
+                                messagesEntered,
+                                recipient,
+                                messageText);
+                    }
+
                     System.out.println("Message ID: " + messageID);
                     System.out.println(message.checkRecipientCell());
                     System.out.println(message.checkMessageLength());
@@ -209,6 +254,7 @@ public class RegistrationPart1 {
 
                     String action = scanner.nextLine();
                     String result;
+                    boolean messageProcessed = false;
 
                     if (action.equals("1")) {
 
@@ -216,18 +262,21 @@ public class RegistrationPart1 {
 
                         if (result.equals("Message successfully sent.")) {
                             manager.addSentMessage(message);
+                            messageProcessed = true;
                         }
 
                     } else if (action.equals("2")) {
 
                         System.out.println(message.SentMessage(2));
-                        System.out.println("Enter 0 to delete the message:");
+                        System.out.println(
+                                "Enter 0 to delete the message:");
 
                         String deleteChoice = scanner.nextLine();
 
                         if (deleteChoice.equals("0")) {
                             manager.addDisregardedMessage(message);
                             result = "Message deleted successfully.";
+                            messageProcessed = true;
                         } else {
                             result = "Invalid choice. Message was not discarded.";
                         }
@@ -238,6 +287,7 @@ public class RegistrationPart1 {
 
                         if (result.equals("Message successfully stored.")) {
                             manager.addStoredMessage(message);
+                            messageProcessed = true;
                         }
 
                     } else {
@@ -246,7 +296,14 @@ public class RegistrationPart1 {
 
                     System.out.println(result);
 
-                    messagesEntered++;
+                    // Only completed actions consume the message quota.
+                    if (messageProcessed) {
+                        messagesEntered++;
+                    } else {
+                        System.out.println(
+                                "Message quota unchanged. "
+                                + "You may try again.");
+                    }
 
                     System.out.println("Total messages sent: "
                             + Message.returnTotalMessages());
@@ -266,12 +323,14 @@ public class RegistrationPart1 {
 
                 case "4":
 
-                    storedMessagesMenu(scanner, manager, cellPhoneNumber);
+                    storedMessagesMenu(
+                            scanner, manager, cellPhoneNumber);
                     break;
 
                 default:
 
-                    System.out.println("Invalid option. Choose 1, 2, 3 or 4.");
+                    System.out.println(
+                            "Invalid option. Choose 1, 2, 3 or 4.");
             }
         }
 
@@ -286,8 +345,7 @@ public class RegistrationPart1 {
             MessageManager manager,
             String sender) {
 
-        // Only load JSON when no stored messages are already
-        // available in the current session.
+        // Load JSON only when no stored messages are available.
         if (manager.getStoredMessages().length == 0) {
 
             String loadResult =
@@ -332,14 +390,15 @@ public class RegistrationPart1 {
 
                 case "4":
                     System.out.println("Enter recipient number:");
-                    String recipient = scanner.nextLine();
-                    System.out.println(manager.searchByRecipient(recipient));
+                    String searchRecipient = scanner.nextLine();
+                    System.out.println(
+                            manager.searchByRecipient(searchRecipient));
                     break;
 
                 case "5":
                     System.out.println("Enter message hash:");
-                    String hash = scanner.nextLine();
-                    System.out.println(manager.deleteByHash(hash));
+                    String searchHash = scanner.nextLine();
+                    System.out.println(manager.deleteByHash(searchHash));
                     break;
 
                 case "6":

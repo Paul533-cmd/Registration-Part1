@@ -182,11 +182,25 @@ public class Message {
     }
 
 
-    /**
-     * Stores the message in a JSON file.
+        /**
+     * Stores the message in the messages.json file.
      *
-     * Existing JSON array entries are preserved when another message
-     * is stored. Special characters are escaped for valid JSON.
+     * Existing JSON array entries are preserved when another
+     * message is stored. Special characters are escaped to
+     * maintain valid JSON formatting.
+     *
+     * JSON format reference:
+     * RFC 8259 - The JavaScript Object Notation (JSON)
+     * Data Interchange Format.
+     * https://www.rfc-editor.org/rfc/rfc8259
+     *
+     * Java file-handling reference:
+     * Oracle Java Documentation - FileWriter.
+     * https://docs.oracle.com/en/java/javase/25/docs/api/
+     * java.base/java/io/FileWriter.html
+     *
+     * These references document the JSON format and Java
+     * file-writing APIs used by this implementation.
      *
      * @return a message showing whether storage succeeded
      */
