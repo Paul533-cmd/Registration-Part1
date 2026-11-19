@@ -52,8 +52,19 @@ public class RegistrationPart1 {
 
         System.out.println("Username successfully captured.");
 
-        // Validate and capture the email address.
+        // Explain the email format before requesting an address.
         System.out.println();
+        System.out.println("--------------- EMAIL REQUIREMENTS ---------------");
+        System.out.println("Your email address must:");
+        System.out.println("- Contain a username before the @ symbol.");
+        System.out.println("- Include the @ symbol.");
+        System.out.println("- Contain a domain name after the @ symbol.");
+        System.out.println("- Include a domain extension, such as .com or .co.za.");
+        System.out.println("- Not contain spaces.");
+        System.out.println("Example: student@gmail.com");
+        System.out.println();
+
+        // Validate and capture the email address.
         System.out.println("Enter your email address:");
         String email = scanner.nextLine();
 
@@ -124,22 +135,31 @@ public class RegistrationPart1 {
 
         System.out.println(registrationMessage);
 
-        System.out.println("Enter your username or email:");
-        String loginUsernameOrEmail = scanner.nextLine();
+        // Keep asking for login details until authentication succeeds.
+        boolean loggedIn = false;
 
-        System.out.println("Enter your password:");
-        String loginPassword = scanner.nextLine();
+        while (!loggedIn) {
 
-        System.out.println(login.returnLoginStatus(
-                loginUsernameOrEmail, loginPassword));
+            System.out.println("Enter your username or email:");
+            String loginUsernameOrEmail = scanner.nextLine();
 
-        if (!login.loginUser(loginUsernameOrEmail, loginPassword)) {
-            System.out.println(
-                    "QuickChat is unavailable because login failed.");
-            scanner.close();
-            return;
+            System.out.println("Enter your password:");
+            String loginPassword = scanner.nextLine();
+
+            System.out.println(login.returnLoginStatus(
+                    loginUsernameOrEmail, loginPassword));
+
+            loggedIn = login.loginUser(
+                    loginUsernameOrEmail, loginPassword);
+
+            if (!loggedIn) {
+                System.out.println(
+                        "Please try logging in again.");
+                System.out.println();
+            }
         }
 
+        // QuickChat is only available after a successful login.
         System.out.println("Welcome to QuickChat.");
 
         int numberOfMessages = -1;
