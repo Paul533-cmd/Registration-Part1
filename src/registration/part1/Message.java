@@ -324,4 +324,41 @@ public class Message {
         usedMessageIDs.clear();
         totalMessagesSent = 0;
     }
+    
+    
+    /**
+     * Returns the message ID.
+     */
+    public String getMessageID() {
+        return messageID;
+    }
+
+    /**
+     * Returns the message number.
+     */
+    public int getMessageNumber() {
+        return messageNumber;
+    }
+
+    /**
+     * Returns the recipient.
+     */
+    public String getRecipient() {
+        return recipient;
+    }
+
+    /**
+     * Returns the message text.
+     */
+    public String getMessageText() {
+        return messageText;
+    }
+
+    /**
+     * Returns the message hash.
+     */
+    public String getMessageHash() {
+        return messageHash;
+    }
+
 }
